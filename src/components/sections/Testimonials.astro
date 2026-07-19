@@ -1,0 +1,97 @@
+---
+// src/components/sections/Testimonials.astro
+//
+// Seccion de testimonios. El layout se adapta automaticamente segun
+// cuantos elementos tenga el array `testimonials`:
+//  - 1 testimonio  -> tarjeta centrada, mas grande (cita destacada)
+//  - 2-3 testimonios -> grid de columnas
+//
+// Para agregar mas testimonios en el futuro: solo agrega un objeto
+// mas al array de abajo, y su imagen correspondiente en
+// src/assets/images/testimonials/ (ej: cliente-2.webp).
+
+import { Image } from 'astro:assets';
+import cliente1 from '../../assets/images/testimonials/cliente-1.webp';
+
+const testimonials = [
+  {
+    image: cliente1,
+    name: 'Mariano Limachi',
+    event: 'Boda · Marzo 2026',
+    quote:
+      'GamEvent superó todas nuestras expectativas. Cada detalle estuvo cuidado, y nos permitieron disfrutar nuestro día sin preocuparnos de nada.',
+    rating: 5,
+  },
+  // Descomenta y completa cuando tengas mas testimonios:
+  // {
+  //   image: cliente2,
+  //   name: 'Nombre del Cliente 2',
+  //   event: 'Cumpleaños · Enero 2026',
+  //   quote: 'Texto del testimonio...',
+  //   rating: 5,
+  // },
+];
+
+// Clases de grid dinamicas segun la cantidad de testimonios
+const gridClass =
+  testimonials.length === 1
+    ? 'max-w-2xl mx-auto'
+    : testimonials.length === 2
+      ? 'grid sm:grid-cols-2 gap-8 max-w-4xl mx-auto'
+      : 'grid sm:grid-cols-2 lg:grid-cols-3 gap-8';
+---
+
+<section id="testimonios" class="py-20 lg:py-28 bg-[#14152B]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="inline-block text-[#B8912A] text-sm font-semibold tracking-[0.3em] uppercase mb-4">
+        Testimonios
+      </span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-white leading-tight mb-4">
+        Lo que dicen quienes confiaron en nosotros
+      </h2>
+    </div>
+
+    <div class={gridClass}>
+      {testimonials.map((t) => (
+        <div class="bg-[#20223D] border border-white/10 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 p-8 sm:p-10">
+
+          <!-- Estrellas -->
+          <div class="flex gap-1 mb-5">
+            {Array.from({ length: t.rating }).map(() => (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#D4AF37">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            ))}
+          </div>
+
+          <!-- Icono de comilla decorativo -->
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="#EADFC0" class="mb-3">
+            <path d="M9.5 4C6.5 5.5 5 8 5 11.5c0 3 1.8 4.5 3.8 4.5 1.8 0 3.2-1.4 3.2-3.2 0-1.7-1.2-3-2.9-3-.3 0-.6 0-.8.1.3-2 1.7-3.5 3.5-4.4L9.5 4zm9 0c-3 1.5-4.5 4-4.5 7.5 0 3 1.8 4.5 3.8 4.5 1.8 0 3.2-1.4 3.2-3.2 0-1.7-1.2-3-2.9-3-.3 0-.6 0-.8.1.3-2 1.7-3.5 3.5-4.4L18.5 4z"/>
+          </svg>
+
+          <p class="text-gray-200 leading-relaxed mb-6 text-[15px] sm:text-base">
+            "{t.quote}"
+          </p>
+
+          <div class="flex items-center gap-4">
+            <Image
+              src={t.image}
+              alt={t.name}
+              class="w-14 h-14 rounded-full object-cover"
+              widths={[100, 150]}
+              sizes="60px"
+              format="webp"
+              quality={80}
+            />
+            <div>
+              <p class="font-semibold text-white">{t.name}</p>
+              <p class="text-sm text-gray-400">{t.event}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

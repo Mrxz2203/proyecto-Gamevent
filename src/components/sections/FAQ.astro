@@ -1,0 +1,81 @@
+---
+// src/components/sections/FAQ.astro
+//
+// Preguntas frecuentes en formato acordeon, usando <details>/<summary>
+// nativo de HTML (accesible, sin JS extra). Para agregar/quitar
+// preguntas, solo edita el array `faqs`.
+
+const faqs = [
+  {
+    question: '¿Con cuánta anticipación debo reservar mi evento?',
+    answer:
+      'Recomendamos reservar con al menos 2 a 3 meses de anticipación para bodas y eventos grandes, y con 3 a 4 semanas para cumpleaños o reuniones sociales más pequeñas. Sin embargo, siempre puedes consultarnos disponibilidad para fechas próximas.',
+  },
+  {
+    question: '¿Qué tipos de eventos organiza GamEvent?',
+    answer:
+      'Organizamos bodas, cumpleaños, eventos corporativos y reuniones sociales como aniversarios, bautizos y reuniones familiares. Cada evento se personaliza según tus necesidades y presupuesto.',
+  },
+  {
+    question: '¿Los paquetes son personalizables?',
+    answer:
+      'Sí. Adaptamos la decoración, el catering, la ambientación y la logística a tu estilo, número de invitados y presupuesto. Cada cotización se arma a la medida de tu evento.',
+  },
+  {
+    question: '¿En qué zonas trabajan?',
+    answer:
+      'Cubrimos eventos en Lima y alrededores. Si tu evento es fuera de la ciudad, escríbenos y evaluamos la logística según la ubicación.',
+  },
+  {
+    question: '¿Qué métodos de pago aceptan?',
+    answer:
+      'Aceptamos transferencia bancaria, tarjetas de crédito/débito y efectivo. Normalmente solicitamos un adelanto para confirmar la reserva de la fecha, y el saldo se cancela antes o el día del evento.',
+  },
+  {
+    question: '¿Puedo cancelar o reprogramar mi evento?',
+    answer:
+      'Sí, entendemos que los planes cambian. Las condiciones de cancelación y reprogramación se detallan en el contrato de servicio que firmamos al confirmar tu reserva, para que ambas partes tengan claridad desde el inicio.',
+  },
+];
+---
+
+<section id="faq" class="py-20 lg:py-28 bg-[#1A1A2E]">
+  <div class="max-w-3xl mx-auto px-6 lg:px-10">
+
+    <div class="text-center mb-14">
+      <span class="inline-block text-[#B8912A] text-sm font-semibold tracking-[0.3em] uppercase mb-4">
+        Preguntas frecuentes
+      </span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-white leading-tight">
+        ¿Tienes dudas? Aquí te ayudamos
+      </h2>
+    </div>
+
+    <div class="space-y-4">
+      {faqs.map((faq) => (
+        <details class="group bg-[#20223D] border border-white/10 rounded-xl px-6 py-1 open:pb-2 transition-all duration-200">
+          <summary class="flex items-center justify-between gap-4 py-5 cursor-pointer list-none font-medium text-white select-none">
+            {faq.question}
+            <svg
+              width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="#B8912A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+              class="shrink-0 transition-transform duration-300 group-open:rotate-45"
+            >
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+          </summary>
+          <p class="text-gray-300 leading-relaxed pb-4 pr-8">
+            {faq.answer}
+          </p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Oculta la flecha triangular por defecto del navegador en <summary> */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

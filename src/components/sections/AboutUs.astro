@@ -1,0 +1,74 @@
+---
+// src/components/sections/AboutUs.astro
+//
+// Seccion "Nosotros": presenta la marca, propuesta de valor y cifras
+// de confianza. Layout de 2 columnas (imagen + texto) que se apila
+// en movil.
+
+import { Image } from 'astro:assets';
+import aboutImg from '../../assets/images/about/nosotros.webp';
+
+const stats = [
+  { value: '8+', label: 'Años de experiencia' },
+  { value: '250+', label: 'Eventos realizados' },
+  { value: '98%', label: 'Clientes satisfechos' },
+];
+---
+
+<section id="nosotros" class="py-20 lg:py-28 bg-[#1A1A2E]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+
+      <!-- Columna imagen -->
+      <div class="relative">
+        <div class="relative rounded-2xl overflow-hidden shadow-xl">
+          <Image
+            src={aboutImg}
+            alt="Equipo de GamEvent organizando un evento"
+            class="w-full h-[420px] lg:h-[520px] object-cover"
+            widths={[400, 700, 1000]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            format="webp"
+            quality={80}
+          />
+        </div>
+        <!-- Detalle decorativo -->
+        <div class="hidden lg:block absolute -bottom-8 -right-8 w-40 h-40 border-4 border-[#D4AF37] rounded-2xl -z-10"></div>
+      </div>
+
+      <!-- Columna texto -->
+      <div>
+        <span class="inline-block text-[#B8912A] text-sm font-semibold tracking-[0.3em] uppercase mb-4">
+          Sobre nosotros
+        </span>
+
+        <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-white leading-tight mb-6">
+          Diseñamos experiencias, <br class="hidden sm:block" />
+          no solo eventos
+        </h2>
+
+        <p class="text-gray-300 leading-relaxed mb-4">
+          En <strong class="text-white">GamEvent</strong> creemos que cada celebración cuenta una historia
+          única. Por eso acompañamos a cada cliente desde la primera idea hasta el último detalle,
+          cuidando que bodas, cumpleaños, reuniones sociales y eventos corporativos reflejen
+          exactamente lo que imaginaron.
+        </p>
+
+        <p class="text-gray-300 leading-relaxed mb-8">
+          Nuestro equipo se encarga de la logística, decoración, coordinación de proveedores y
+          ambientación, para que tú solo tengas que disfrutar el momento junto a los tuyos.
+        </p>
+
+        <!-- Estadisticas -->
+        <div class="grid grid-cols-3 gap-6 border-t border-white/10 pt-8">
+          {stats.map((stat) => (
+            <div>
+              <p class="font-serif text-3xl sm:text-4xl font-semibold text-[#B8912A]">{stat.value}</p>
+              <p class="text-sm text-gray-400 mt-1">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

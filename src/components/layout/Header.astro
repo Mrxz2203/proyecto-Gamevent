@@ -1,0 +1,137 @@
+---
+// src/components/layout/Header.astro
+//
+// Header sticky: transparente sobre el Hero, cambia a fondo blanco
+// solido con sombra al hacer scroll (ver script al final).
+// Incluye logo, navegacion de escritorio, boton CTA y menu movil.
+
+import Logo from '../ui/Logo.astro';
+import Navbar from './Navbar.astro';
+---
+
+<header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent text-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="flex items-center justify-between h-20">
+
+      <!-- Logo -->
+      <a href="#hero" class="flex items-center gap-2 shrink-0">
+        <Logo size={48} variant="gold" />
+      </a>
+
+      <!-- Navegacion escritorio -->
+      <Navbar class="hidden lg:flex items-center gap-8" />
+
+      <!-- CTA + boton movil -->
+      <div class="flex items-center gap-4">
+        <a
+          href="#contacto"
+          class="hidden md:inline-block bg-[#B8912A] hover:bg-[#9C7A1C] text-white text-sm font-semibold tracking-wide px-6 py-2.5 rounded-full transition-colors duration-200"
+        >
+          Cotiza tu evento
+        </a>
+
+        <!-- Boton hamburguesa (solo movil) -->
+        <button
+          id="mobile-menu-btn"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          class="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
+        >
+          <span id="bar1" class="block w-6 h-0.5 bg-current transition-all duration-300"></span>
+          <span id="bar2" class="block w-6 h-0.5 bg-current transition-all duration-300"></span>
+          <span id="bar3" class="block w-6 h-0.5 bg-current transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu movil desplegable -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-[#1A1A2E] shadow-lg"
+  >
+    <Navbar
+      class="flex flex-col items-start gap-1 px-6 py-6"
+      linkClass="text-gray-200 hover:text-[#D4AF37] block w-full py-3 border-b border-white/10 transition-colors duration-200"
+    />
+    <div class="px-6 pb-6">
+      <a
+        href="#contacto"
+        class="block text-center bg-[#B8912A] hover:bg-[#9C7A1C] text-white text-sm font-semibold tracking-wide px-6 py-3 rounded-full transition-colors duration-200"
+      >
+        Cotiza tu evento
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Espaciador para que el contenido no quede debajo del header fixed -->
+<div class="h-0"></div>
+
+<script>
+  // Cambia el fondo del header cuando el usuario hace scroll
+  const header = document.getElementById('site-header');
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const bar1 = document.getElementById('bar1');
+  const bar2 = document.getElementById('bar2');
+  const bar3 = document.getElementById('bar3');
+
+  const SCROLL_THRESHOLD = 60;
+
+  function handleScroll() {
+    if (!header) return;
+    if (window.scrollY > SCROLL_THRESHOLD) {
+      header.classList.remove('bg-transparent');
+      header.classList.add('bg-[#1A1A2E]/95', 'backdrop-blur-sm', 'shadow-md');
+    } else {
+      // Solo queda transparente si el menu movil esta cerrado
+      if (mobileMenu?.classList.contains('max-h-0')) {
+        header.classList.add('bg-transparent');
+        header.classList.remove('bg-[#1A1A2E]/95', 'backdrop-blur-sm', 'shadow-md');
+      }
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll);
+  handleScroll();
+
+  // Toggle del menu movil
+  let isOpen = false;
+  menuBtn?.addEventListener('click', () => {
+    isOpen = !isOpen;
+    menuBtn.setAttribute('aria-expanded', String(isOpen));
+
+    if (isOpen) {
+      mobileMenu?.classList.remove('max-h-0');
+      mobileMenu?.classList.add('max-h-[600px]');
+      header?.classList.add('bg-[#1A1A2E]/95', 'backdrop-blur-sm', 'shadow-md');
+      header?.classList.remove('bg-transparent');
+      // Animar hamburguesa a X
+      bar1?.classList.add('rotate-45', 'translate-y-2');
+      bar2?.classList.add('opacity-0');
+      bar3?.classList.add('-rotate-45', '-translate-y-2');
+    } else {
+      mobileMenu?.classList.add('max-h-0');
+      mobileMenu?.classList.remove('max-h-[600px]');
+      bar1?.classList.remove('rotate-45', 'translate-y-2');
+      bar2?.classList.remove('opacity-0');
+      bar3?.classList.remove('-rotate-45', '-translate-y-2');
+      handleScroll();
+    }
+  });
+
+  // Cierra el menu movil al hacer click en un enlace
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      isOpen = false;
+      mobileMenu?.classList.add('max-h-0');
+      mobileMenu?.classList.remove('max-h-[600px]');
+      menuBtn?.setAttribute('aria-expanded', 'false');
+      bar1?.classList.remove('rotate-45', 'translate-y-2');
+      bar2?.classList.remove('opacity-0');
+      bar3?.classList.remove('-rotate-45', '-translate-y-2');
+      handleScroll();
+    });
+  });
+</script>

@@ -1,0 +1,20 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradFav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8C874"/>
+      <stop offset="50%" stop-color="#C9A227"/>
+      <stop offset="100%" stop-color="#9C7A1C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Circulo de fondo solido para que se vea bien en pestañas de navegador -->
+  <circle cx="256" cy="256" r="248" fill="#1A1A2E"/>
+
+  <!-- Anillo dorado -->
+  <circle cx="256" cy="256" r="228" fill="none" stroke="url(#goldGradFav)" stroke-width="8"/>
+
+  <!-- Monograma GE, mas grande porque no hay texto debajo -->
+  <text x="256" y="298" font-family="Georgia, 'Times New Roman', serif" font-size="190" font-weight="500" fill="url(#goldGradFav)" text-anchor="middle" letter-spacing="0">
+    GE
+  </text>
+</svg>

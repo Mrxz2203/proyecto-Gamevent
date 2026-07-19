@@ -1,0 +1,65 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8C874"/>
+      <stop offset="50%" stop-color="#C9A227"/>
+      <stop offset="100%" stop-color="#9C7A1C"/>
+    </linearGradient>
+    <linearGradient id="goldGradSoft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#B8912A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo transparente -->
+  <rect width="512" height="512" fill="none"/>
+
+  <!-- Anillo exterior decorativo -->
+  <circle cx="256" cy="256" r="230" fill="none" stroke="url(#goldGrad)" stroke-width="3"/>
+  <circle cx="256" cy="256" r="214" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Puntos decorativos en el anillo -->
+  <circle cx="256" cy="26" r="4" fill="url(#goldGrad)"/>
+  <circle cx="256" cy="486" r="4" fill="url(#goldGrad)"/>
+  <circle cx="26" cy="256" r="4" fill="url(#goldGrad)"/>
+  <circle cx="486" cy="256" r="4" fill="url(#goldGrad)"/>
+
+  <!-- Ramas tipo laurel, lado izquierdo -->
+  <g stroke="url(#goldGrad)" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <path d="M120 300 C 100 280, 95 250, 108 220"/>
+    <path d="M108 220 L 82 210"/>
+    <path d="M112 240 L 86 232"/>
+    <path d="M118 260 L 92 255"/>
+    <path d="M122 280 L 96 278"/>
+    <path d="M120 300 L 96 304"/>
+  </g>
+
+  <!-- Ramas tipo laurel, lado derecho (espejo) -->
+  <g stroke="url(#goldGrad)" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <path d="M392 300 C 412 280, 417 250, 404 220"/>
+    <path d="M404 220 L 430 210"/>
+    <path d="M400 240 L 426 232"/>
+    <path d="M394 260 L 420 255"/>
+    <path d="M390 280 L 416 278"/>
+    <path d="M392 300 L 416 304"/>
+  </g>
+
+  <!-- Monograma GE -->
+  <text x="256" y="255" font-family="Georgia, 'Times New Roman', serif" font-size="128" font-weight="400" fill="url(#goldGradSoft)" text-anchor="middle" letter-spacing="2">
+    GE
+  </text>
+
+  <!-- Linea decorativa central -->
+  <line x1="176" y1="292" x2="336" y2="292" stroke="url(#goldGrad)" stroke-width="1.5"/>
+  <circle cx="256" cy="292" r="3" fill="url(#goldGrad)"/>
+
+  <!-- Nombre de marca -->
+  <text x="256" y="332" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="500" fill="url(#goldGradSoft)" text-anchor="middle" letter-spacing="6">
+    GAMEVENT
+  </text>
+
+  <!-- Subtitulo -->
+  <text x="256" y="358" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="400" fill="#B8912A" text-anchor="middle" letter-spacing="4">
+    EVENTOS &amp; CELEBRACIONES
+  </text>
+</svg>

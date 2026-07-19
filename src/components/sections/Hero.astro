@@ -1,0 +1,73 @@
+---
+// src/components/sections/Hero.astro
+//
+// Portada principal del landing. Usa src/assets/images/hero/hero-bg.webp
+// como fondo, con Astro Image para optimizacion automatica (compresion,
+// formatos modernos, lazy-loading deshabilitado porque es above-the-fold).
+
+import { Image } from 'astro:assets';
+import heroBg from '../../assets/images/hero/hero-bg.webp';
+---
+
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+  <!-- Imagen de fondo -->
+  <div class="absolute inset-0 -z-10">
+    <Image
+      src={heroBg}
+      alt="Evento privado organizado por GamEvent"
+      class="w-full h-full object-cover"
+      widths={[640, 1024, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      format="webp"
+      quality={80}
+    />
+    <!-- Overlay oscuro para legibilidad del texto -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#12121F]/70 via-[#1A1A2E]/50 to-[#1A1A2E]/85"></div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center pt-20">
+    <span class="inline-block text-[#E8C874] text-sm font-semibold tracking-[0.3em] uppercase mb-5">
+      Eventos & Celebraciones
+    </span>
+
+    <h1 class="text-white font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight mb-6">
+      Convertimos tus momentos <br class="hidden sm:block" />
+      en celebraciones <span class="text-[#E8C874] italic">inolvidables</span>
+    </h1>
+
+    <p class="text-gray-200 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+      Bodas, cumpleaños, reuniones sociales y eventos corporativos, diseñados con
+      elegancia y atención al detalle para que solo te preocupes de disfrutar.
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href="#contacto"
+        class="w-full sm:w-auto bg-[#B8912A] hover:bg-[#9C7A1C] text-white font-semibold tracking-wide px-8 py-3.5 rounded-full transition-all duration-200 hover:scale-105"
+      >
+        Cotiza tu evento
+      </a>
+      <a
+        href="#portafolio"
+        class="w-full sm:w-auto border-2 border-white/70 hover:bg-white hover:text-gray-900 text-white font-semibold tracking-wide px-8 py-3.5 rounded-full transition-all duration-200"
+      >
+        Ver portafolio
+      </a>
+    </div>
+  </div>
+
+  <!-- Indicador de scroll -->
+  <a
+    href="#nosotros"
+    aria-label="Ir a la siguiente seccion"
+    class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce"
+  >
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </a>
+</section>

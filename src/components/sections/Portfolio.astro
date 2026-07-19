@@ -1,0 +1,119 @@
+---
+// src/components/sections/Portfolio.astro
+
+import { Image } from 'astro:assets';
+import p1 from '../../assets/images/portfolio/portfolio-1.webp';
+import p2 from '../../assets/images/portfolio/portfolio-2.webp';
+import p3 from '../../assets/images/portfolio/portfolio-3.webp';
+import p4 from '../../assets/images/portfolio/portfolio-4.webp';
+import p5 from '../../assets/images/portfolio/portfolio-5.webp';
+import p6 from '../../assets/images/portfolio/portfolio-6.webp';
+
+const gallery = [
+  {
+    image: p1,
+    alt: 'Boda organizada por GamEvent',
+    title: 'Boda Elegante',
+    description:
+      'Planificación integral de una boda con decoración personalizada, iluminación ambiental y coordinación completa del evento.'
+  },
+  {
+    image: p2,
+    alt: 'Cumpleaños organizado por GamEvent',
+    title: 'Cumpleaños',
+    description:
+      'Celebración temática con ambientación exclusiva, catering y entretenimiento para invitados.'
+  },
+  {
+    image: p3,
+    alt: 'Evento corporativo',
+    title: 'Evento Corporativo',
+    description:
+      'Organización de conferencias, lanzamientos y reuniones empresariales con logística profesional.'
+  },
+  {
+    image: p4,
+    alt: 'Reunión social',
+    title: 'Reunión Social',
+    description:
+      'Eventos familiares y sociales con decoración personalizada y atención a cada detalle.'
+  },
+  {
+    image: p5,
+    alt: 'Decoración de eventos',
+    title: 'Decoración Premium',
+    description:
+      'Diseño de espacios elegantes utilizando flores, iluminación y mobiliario exclusivo.'
+  },
+  {
+    image: p6,
+    alt: 'Celebración',
+    title: 'Recepción',
+    description:
+      'Recepción para invitados con ambientación moderna y servicios de alta calidad.'
+  }
+];
+---
+
+<section id="portafolio" class="py-20 lg:py-28 bg-[#1A1A2E]">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<div class="text-center max-w-2xl mx-auto mb-16">
+<span class="inline-block text-[#B8912A] text-sm font-semibold tracking-[0.3em] uppercase mb-4">
+Nuestro trabajo
+</span>
+
+<h2 class="font-serif text-3xl sm:text-4xl font-semibold text-white mb-4">
+Momentos que ya celebramos
+</h2>
+
+<p class="text-gray-300">
+Una muestra de los eventos que hemos tenido el privilegio de organizar.
+</p>
+
+</div>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+{gallery.map((item)=> (
+
+<details class="group overflow-hidden rounded-2xl cursor-pointer bg-[#23233d]">
+
+<summary class="list-none relative">
+
+<Image
+src={item.image}
+alt={item.alt}
+class="w-full h-72 object-cover transition duration-500 group-hover:scale-110"
+/>
+
+<div class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition"></div>
+
+<div class="absolute bottom-5 left-5 right-5">
+
+<h3 class="text-white text-xl font-semibold">
+{item.title}
+</h3>
+
+<p class="text-sm text-[#D4AF37] mt-1">
+Haz clic para conocer más
+</p>
+
+</div>
+
+</summary>
+
+<div class="px-6 py-5 text-gray-300 text-sm leading-relaxed border-t border-white/10">
+{item.description}
+</div>
+
+</details>
+
+))}
+
+</div>
+
+</div>
+
+</section>

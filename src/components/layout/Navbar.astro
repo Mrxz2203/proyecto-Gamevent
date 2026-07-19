@@ -1,0 +1,36 @@
+---
+// src/components/layout/Navbar.astro
+//
+// Lista de enlaces de navegacion. Se reutiliza dentro de Header.astro
+// tanto para el menu de escritorio como para el menu movil (cambiando
+// las clases via la prop `class` y `linkClass`).
+
+interface Props {
+  class?: string;
+  linkClass?: string;
+}
+
+const {
+  class: className = '',
+  linkClass = 'text-gray-200 hover:text-[#D4AF37] transition-colors duration-200',
+} = Astro.props;
+
+const links = [
+  { href: '#hero', label: 'Inicio' },
+  { href: '#nosotros', label: 'Nosotros' },
+  { href: '#servicios', label: 'Servicios' },
+  { href: '#portafolio', label: 'Portafolio' },
+  { href: '#testimonios', label: 'Testimonios' },
+  { href: '#faq', label: 'Preguntas' },
+];
+---
+
+<ul class={className}>
+  {links.map((link) => (
+    <li>
+      <a href={link.href} class={`${linkClass} font-medium text-sm tracking-wide`}>
+        {link.label}
+      </a>
+    </li>
+  ))}
+</ul>

@@ -1,0 +1,84 @@
+---
+// src/components/sections/Services.astro
+//
+// Seccion "Servicios": grid de tarjetas mostrando los tipos de
+// eventos que organiza GamEvent. Cada tarjeta usa una imagen de
+// src/assets/images/services/.
+
+import { Image } from 'astro:assets';
+import bodasImg from '../../assets/images/services/bodas.webp';
+import cumpleanosImg from '../../assets/images/services/cumpleanos.webp';
+import corporativoImg from '../../assets/images/services/corporativo.webp';
+import socialImg from '../../assets/images/services/social.webp';
+
+const services = [
+  {
+    image: bodasImg,
+    title: 'Bodas',
+    description: 'Ceremonias y recepciones a tu medida, cuidando cada detalle para el día más importante.',
+  },
+  {
+    image: cumpleanosImg,
+    title: 'Cumpleaños',
+    description: 'Celebraciones temáticas para cualquier edad, con decoración y ambientación personalizada.',
+  },
+  {
+    image: corporativoImg,
+    title: 'Eventos Corporativos',
+    description: 'Conferencias, lanzamientos y celebraciones de empresa con logística profesional.',
+  },
+  {
+    image: socialImg,
+    title: 'Reuniones Sociales',
+    description: 'Aniversarios, bautizos y reuniones familiares organizadas con calidez y estilo.',
+  },
+];
+---
+
+<section id="servicios" class="py-20 lg:py-28 bg-[#14152B]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+    <!-- Encabezado de seccion -->
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="inline-block text-[#B8912A] text-sm font-semibold tracking-[0.3em] uppercase mb-4">
+        Qué hacemos
+      </span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-white leading-tight mb-4">
+        Un servicio para cada celebración
+      </h2>
+      <p class="text-gray-300 leading-relaxed">
+        Adaptamos nuestra experiencia al tipo de evento que estás planeando, sin perder
+        el cuidado en el detalle que nos caracteriza.
+      </p>
+    </div>
+
+    <!-- Grid de tarjetas -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      {services.map((service) => (
+        <div class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-96">
+          <Image
+            src={service.image}
+            alt={service.title}
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            widths={[300, 500, 700]}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            format="webp"
+            quality={80}
+          />
+          <!-- Overlay degradado -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+          <!-- Texto -->
+          <div class="absolute inset-x-0 bottom-0 p-6">
+            <h3 class="font-serif text-xl font-semibold text-white mb-2">
+              {service.title}
+            </h3>
+            <p class="text-gray-200 text-sm leading-relaxed opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-24 overflow-hidden transition-all duration-300">
+              {service.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

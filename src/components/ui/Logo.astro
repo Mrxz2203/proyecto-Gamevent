@@ -1,0 +1,108 @@
+---
+// src/components/ui/Logo.astro
+//
+// Componente de logo reutilizable como SVG inline.
+// Uso en Header:    <Logo size={64} />
+// Uso en About:     <Logo size={140} />
+// Uso en Contact:   <Logo size={90} variant="light" />
+//
+// variant "gold"  -> dorado (uso normal, sobre fondos claros u oscuros neutros)
+// variant "light" -> blanco (uso sobre fotos oscuras o secciones con fondo de color)
+// variant "dark"  -> negro/carbón (uso sobre fondos claros tipo blanco puro)
+
+interface Props {
+  size?: number;
+  variant?: "gold" | "light" | "dark";
+  class?: string;
+}
+
+const { size = 80, variant = "gold", class: className = "" } = Astro.props;
+
+const colors = {
+  gold: { primary: "#D4AF37", secondary: "#B8912A", grad1: "#E8C874", grad2: "#9C7A1C" },
+  light: { primary: "#FFFFFF", secondary: "#F2F2F2", grad1: "#FFFFFF", grad2: "#E0E0E0" },
+  dark: { primary: "#1A1A2E", secondary: "#2E2E42", grad1: "#3A3A52", grad2: "#111119" },
+};
+
+const c = colors[variant];
+const gradId = `goldGrad-${variant}-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 512 512"
+  xmlns="http://www.w3.org/2000/svg"
+  class={`gamevent-logo ${className}`}
+  role="img"
+  aria-label="GamEvent - Eventos y Celebraciones"
+>
+  <defs>
+    <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color={c.grad1} />
+      <stop offset="50%" stop-color={c.primary} />
+      <stop offset="100%" stop-color={c.grad2} />
+    </linearGradient>
+  </defs>
+
+  <!-- Anillo exterior -->
+  <circle cx="256" cy="256" r="230" fill="none" stroke={`url(#${gradId})`} stroke-width="3" />
+  <circle cx="256" cy="256" r="214" fill="none" stroke={`url(#${gradId})`} stroke-width="1.5" opacity="0.7" />
+
+  <!-- Puntos decorativos -->
+  <circle cx="256" cy="26" r="4" fill={`url(#${gradId})`} />
+  <circle cx="256" cy="486" r="4" fill={`url(#${gradId})`} />
+  <circle cx="26" cy="256" r="4" fill={`url(#${gradId})`} />
+  <circle cx="486" cy="256" r="4" fill={`url(#${gradId})`} />
+
+  <!-- Laurel izquierdo -->
+  <g stroke={`url(#${gradId})`} stroke-width="2.5" fill="none" stroke-linecap="round">
+    <path d="M120 300 C 100 280, 95 250, 108 220" />
+    <path d="M108 220 L 82 210" />
+    <path d="M112 240 L 86 232" />
+    <path d="M118 260 L 92 255" />
+    <path d="M122 280 L 96 278" />
+    <path d="M120 300 L 96 304" />
+  </g>
+
+  <!-- Laurel derecho -->
+  <g stroke={`url(#${gradId})`} stroke-width="2.5" fill="none" stroke-linecap="round">
+    <path d="M392 300 C 412 280, 417 250, 404 220" />
+    <path d="M404 220 L 430 210" />
+    <path d="M400 240 L 426 232" />
+    <path d="M394 260 L 420 255" />
+    <path d="M390 280 L 416 278" />
+    <path d="M392 300 L 416 304" />
+  </g>
+
+  <!-- Monograma -->
+  <text
+    x="256" y="255"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="128"
+    fill={`url(#${gradId})`}
+    text-anchor="middle"
+    letter-spacing="2"
+  >GE</text>
+
+  <line x1="176" y1="292" x2="336" y2="292" stroke={`url(#${gradId})`} stroke-width="1.5" />
+  <circle cx="256" cy="292" r="3" fill={`url(#${gradId})`} />
+
+  <text
+    x="256" y="332"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="30"
+    fill={`url(#${gradId})`}
+    text-anchor="middle"
+    letter-spacing="6"
+  >GAMEVENT</text>
+
+  <text
+    x="256" y="358"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="13"
+    fill={c.secondary}
+    text-anchor="middle"
+    letter-spacing="4"
+  >EVENTOS &amp; CELEBRACIONES</text>
+</svg>
